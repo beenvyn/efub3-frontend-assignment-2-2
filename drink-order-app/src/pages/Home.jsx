@@ -10,6 +10,7 @@ const Home = () => {
     <Layout>
       <Header></Header>
       <Tablist>
+        {/* 클릭 시 글자 색이 핑크색으로 변경 */}
         <NavLink
           to="/best"
           style={({ isActive }) =>
@@ -52,6 +53,7 @@ const Home = () => {
         </NavLink>
       </Tablist>
       <Routes>
+        {/* 기본 라우트 설정 */}
         <Route path="/" element={<Drinks type="best" />} />
         <Route path="/best" element={<Drinks type="best" />}></Route>
         <Route path="/coffee" element={<Drinks type="coffee" />}></Route>

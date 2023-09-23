@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Card from "../components/Card";
 import { BestList, CoffeeList, ShakeList, BubbleteaList } from "../DrinkList";
 
+// 음료 타입에 따른 음료 리스트 반환
 const Drinks = ({ type }) => {
   let drinkList;
 

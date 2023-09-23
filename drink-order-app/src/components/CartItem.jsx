@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { CartItemAtom } from "../recoil/Atom";
 import { useRecoilState } from "recoil";
 
+// 음료 수량 변경, 삭제 기능
 const CartItem = ({ id, name, price, img, quantity }) => {
   const [cartItem, setCartItem] = useRecoilState(CartItemAtom);
   const handleMinusQuantity = (id) => {

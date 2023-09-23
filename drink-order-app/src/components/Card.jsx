@@ -4,6 +4,7 @@ import { useRecoilState } from "recoil";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+// 메인 페이지의 음료 컴포넌트
 const Card = ({ id, name, price, img }) => {
   const [cartItem, setCartItem] = useRecoilState(CartItemAtom);
   const [showCartModal, setShowCartModal] = useState(false);

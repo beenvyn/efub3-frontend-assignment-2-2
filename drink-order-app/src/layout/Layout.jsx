@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+// 기본 레이아웃
 const Layout = ({ children }) => {
   return (
     <Container>
