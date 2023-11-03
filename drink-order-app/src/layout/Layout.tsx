@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { ReactNode } from "react";
 
 // 기본 레이아웃
-const Layout = ({ children }) => {
+const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <Container>
       <Content>{children}</Content>

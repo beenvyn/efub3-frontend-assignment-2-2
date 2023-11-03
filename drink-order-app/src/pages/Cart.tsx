@@ -5,6 +5,11 @@ import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 import CartItem from "../components/CartItem";
 import { TotalPriceSelector } from "../recoil/Selector";
 import { useNavigate } from "react-router-dom";
+import { CardItemProps } from "../types";
+
+interface CartItemProps extends CardItemProps {
+  quantity: number;
+}
 
 const Cart = () => {
   const [cartItem, setCartItem] = useRecoilState(CartItemAtom);
@@ -16,7 +21,7 @@ const Cart = () => {
     <Layout>
       <Header>
         <HomeButton onClick={() => navigate("/")}>
-          <i class="fas fa-arrow-left"></i>
+          <i className="fas fa-arrow-left"></i>
         </HomeButton>
         15000원 이상 무료 배송!
       </Header>
@@ -24,7 +29,7 @@ const Cart = () => {
       <DrinkWrapper>
         {cartItem.length ? (
           <>
-            {cartItem.map((e) => (
+            {cartItem.map((e: CartItemProps) => (
               <CartItem
                 id={e.id}
                 name={e.name}
@@ -42,9 +47,11 @@ const Cart = () => {
                 )}
               </FreeShipping>
               <OrderWrapper>
-                <OrderButton>{totalPrice}원 주문하기</OrderButton>
+                <OrderButton>
+                  {totalPrice.toLocaleString()}원 주문하기
+                </OrderButton>
                 <ResetButton onClick={() => resetItem()}>
-                  <i class="fas fa-redo"></i>
+                  <i className="fas fa-redo"></i>
                 </ResetButton>
               </OrderWrapper>
             </TotalWrapper>

@@ -2,8 +2,12 @@ import styled from "styled-components";
 import Card from "../components/Card";
 import { BestList, CoffeeList, ShakeList, BubbleteaList } from "../DrinkList";
 
+interface DrinkProps {
+  type: "best" | "coffee" | "shake" | "bubbletea";
+}
+
 // 음료 타입에 따른 음료 리스트 반환
-const Drinks = ({ type }) => {
+const Drinks = ({ type }: DrinkProps) => {
   let drinkList;
 
   switch (type) {

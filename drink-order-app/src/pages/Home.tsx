@@ -8,9 +8,9 @@ import Drinks from "../layout/Drinks";
 const Home = () => {
   return (
     <Layout>
-      <Header></Header>
+      <Header />
+      {/* 클릭 시 글자 색이 핑크색으로 변경 */}
       <Tablist>
-        {/* 클릭 시 글자 색이 핑크색으로 변경 */}
         <NavLink
           to="/best"
           style={({ isActive }) =>

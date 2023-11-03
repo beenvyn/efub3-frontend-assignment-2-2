@@ -3,23 +3,37 @@ import { CartItemAtom } from "../recoil/Atom";
 import { useRecoilState } from "recoil";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { CardItemProps, CartItemProps } from "../types";
 
 // 메인 페이지의 음료 컴포넌트
-const Card = ({ id, name, price, img }) => {
+const Card = (props: CardItemProps) => {
   const [cartItem, setCartItem] = useRecoilState(CartItemAtom);
   const [showCartModal, setShowCartModal] = useState(false);
   const navigate = useNavigate();
 
   const handleAddCart = () => {
-    const itemExists = cartItem.find((item) => item.id === id);
+    console.log("cartItem:", cartItem);
+    console.log("id:", props.id);
+    const itemExists = cartItem.find(
+      (item: CardItemProps) => item.id === props.id
+    );
 
     if (itemExists) {
-      const updateQuantity = cartItem.map((item) =>
-        item.id === id ? { quantity: item.quantity + 1 } : item
+      const updateQuantity = cartItem.map((item: CartItemProps) =>
+        item.id === props.id ? { ...item, quantity: item.quantity + 1 } : item
       );
       setCartItem(updateQuantity);
     } else {
-      setCartItem((item) => [...item, { id, name, price, img, quantity: 1 }]);
+      setCartItem((item: any) => [
+        ...item,
+        {
+          id: props.id,
+          name: props.name,
+          price: props.price,
+          img: props.img,
+          quantity: 1,
+        },
+      ]);
     }
 
     setShowCartModal(true);
@@ -29,12 +43,12 @@ const Card = ({ id, name, price, img }) => {
     <>
       <Wrapper>
         <Image>
-          <img src={img} alt="drink-img" />
+          <img src={props.img} alt="drink-img" />
         </Image>
         <DetailWrapper>
           <Detail>
-            <Name>{name}</Name>
-            <Price>{price}원</Price>
+            <Name>{props.name}</Name>
+            <Price>{props.price}원</Price>
           </Detail>
           <AddButton onClick={handleAddCart}>+</AddButton>
         </DetailWrapper>

@@ -1,26 +1,28 @@
 import styled from "styled-components";
 import { CartItemAtom } from "../recoil/Atom";
 import { useRecoilState } from "recoil";
+import { CartItemProps } from "../types";
 
 // 음료 수량 변경, 삭제 기능
-const CartItem = ({ id, name, price, img, quantity }) => {
+const CartItem = (props: CartItemProps) => {
   const [cartItem, setCartItem] = useRecoilState(CartItemAtom);
-  const handleMinusQuantity = (id) => {
-    const minusQuantity = cartItem.map((item) =>
+
+  const handleMinusQuantity = (id: number) => {
+    const minusQuantity = cartItem.map((item: CartItemProps) =>
       item.id === id ? { ...item, quantity: item.quantity - 1 } : item
     );
     setCartItem(minusQuantity);
   };
 
-  const handlePlusQuantity = (id) => {
-    const plusQuantity = cartItem.map((item) =>
+  const handlePlusQuantity = (id: number) => {
+    const plusQuantity = cartItem.map((item: CartItemProps) =>
       item.id === id ? { ...item, quantity: item.quantity + 1 } : item
     );
     setCartItem(plusQuantity);
   };
 
-  const handleDeleteItem = (id) => {
-    const deleteItem = cartItem.filter((item) => item.id !== id);
+  const handleDeleteItem = (id: number) => {
+    const deleteItem = cartItem.filter((item: CartItemProps) => item.id !== id);
     setCartItem(deleteItem);
   };
 
@@ -28,25 +30,28 @@ const CartItem = ({ id, name, price, img, quantity }) => {
     <Container>
       <DrinkCount>
         <Image>
-          <img src={img} alt="drink-img" />
+          <img src={props.img} alt="drink-img" />
         </Image>
         <ButtonGroup>
-          <Button className="minus" onClick={() => handleMinusQuantity(id)}>
+          <Button
+            className="minus"
+            onClick={() => handleMinusQuantity(props.id)}
+          >
             -
           </Button>
-          <Button className="quantity">{quantity}</Button>
-          <Button className="plus" onClick={() => handlePlusQuantity(id)}>
+          <Button className="quantity">{props.quantity}</Button>
+          <Button className="plus" onClick={() => handlePlusQuantity(props.id)}>
             +
           </Button>
         </ButtonGroup>
-        <DeleteButton onClick={() => handleDeleteItem(id)}>
-          <i class="fas fa-times close"></i>
+        <DeleteButton onClick={() => handleDeleteItem(props.id)}>
+          <i className="fas fa-times close" />
         </DeleteButton>
       </DrinkCount>
 
       <DrinkDetail>
-        <Name>{name}</Name>
-        <Price>{price}원</Price>
+        <Name>{props.name}</Name>
+        <Price>{props.price}원</Price>
       </DrinkDetail>
     </Container>
   );
